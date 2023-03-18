@@ -8,6 +8,11 @@ import {Product} from './product.model'
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+   imgParent = ''
+
+
+
+  /* curso 1 */
   name = 'Miguel';
   age = 28;
   img = 'https://catalyst-au.net/wp-content/uploads/2021/12/top-programing-languages.jpeg';
