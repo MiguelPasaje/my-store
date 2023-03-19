@@ -4,8 +4,8 @@
 
 
 <h1>renderizar img</h1>
-<img width="300" [src]="img" alt="img1" *ngIf="img; else elseImg">
+<img width="300" [src]="img" (load)="imgLoaded()" (error)="imgError()" alt="img1" *ngIf="img; else elseImg">
 <ng-template #elseImg>
-  <img width="200" src="./assets/images/bike.jpg" alt="img" >
+  <img width="200" [src]="imgDefault" alt="img" >
 </ng-template>
 

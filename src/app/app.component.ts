@@ -10,6 +10,9 @@ import {Product} from './product.model'
 export class AppComponent {
    imgParent = ''
 
+   onloaded(img:string){
+    console.log('log padre',img)
+   }
 
 
   /* curso 1 */

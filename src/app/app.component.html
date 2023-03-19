@@ -7,5 +7,5 @@
 <h3>componente 2</h3>
 <h1> dinamicamente </h1>
 <p>URL: <input type="text" [(ngModel)]="imgParent"></p>
-<app-img [img]="imgParent"></app-img>
+<app-img (loaded)="onloaded($event)" [img]="imgParent"></app-img>
 
