@@ -7,5 +7,16 @@
 <h3>componente 2</h3>
 <h1> dinamicamente </h1>
 <p>URL: <input type="text" [(ngModel)]="imgParent"></p>
-<app-img (loaded)="onloaded($event)" [img]="imgParent"></app-img>
+<hr>
+<p>eliminar component</p>
+<button (click)="toggleImg()">Toggle img</button>
+<p>{{ showImg }}</p>
+<hr>
+<app-img *ngIf="showImg" (loaded)="onloaded($event)" [img]="imgParent"></app-img>
+
+<hr>
+<h3>Componente para producto</h3>
+
+
+<app-product *ngFor="let product of products" [product]="product"></app-product>
 
