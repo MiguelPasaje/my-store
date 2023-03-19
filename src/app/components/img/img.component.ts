@@ -10,7 +10,18 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
   counter = 0
   counterFn: number | undefined;
 
-  @Input() img:string = '' //@input -> decorador para recibir datos desde el padre -> no olvidarse de importar Input
+
+
+  //@Input() img:string = '' //@input -> decorador para recibir datos desde el padre -> no olvidarse de importar Input
+
+  img:string = ''
+
+  @Input('img')
+  set changeImg(newImg:string){
+    this.img = newImg
+    console.log('change just img => ' , this.img )
+  }
+
   @Input() alt:string = ''
   imgDefault = './assets/images/bike.jpg'
 
