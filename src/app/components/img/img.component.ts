@@ -7,7 +7,7 @@ import { Component, OnInit,Input,Output,EventEmitter,OnChanges, AfterViewInit,On
 })
 export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
-  counter = 0
+ /*  counter = 0 */
   counterFn: number | undefined;
 
 
@@ -43,11 +43,11 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
     //before render
     console.log('ngOnInit','imageValue => ' , this.img)
     // async - fetch -- once time
-
+/*
     this.counterFn =  window.setInterval(()=>{
       this.counter += 1;
       console.log('run counter')
-    },1000)
+    },1000) */
 
 
 
@@ -61,8 +61,8 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
   ngOnDestroy(): void {
     // delete component
     console.log('OnDestroy')
-    window.clearInterval(this.counterFn)
-
+   /*  window.clearInterval(this.counterFn)
+ */
   }
 
   imgError(){

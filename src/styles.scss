@@ -5,3 +5,10 @@ body{
   color: white;
 }
 
+.product--grid{
+  app-img{
+    img{
+      border-radius: 10px;
+    }
+  }
+}
