@@ -8,6 +8,8 @@ import { Product } from 'src/app/models/product.model';
 })
 export class ProductsComponent {
 
+  myShoppingCart: Product[] = []
+  total = 0
   products: Product[] = [
     {
       id:'1',
@@ -49,4 +51,12 @@ export class ProductsComponent {
   ]
 
 
+  onAddToShopingcart(product:Product){
+    //console.log(product)
+    this.myShoppingCart.push(product)
+    console.log(this.myShoppingCart)
+    //this.total = this.myShoppingCart.reduce((sum,item)=> sum + item.price,0)
+    this.total += product.price
+  }
 }
+ 
