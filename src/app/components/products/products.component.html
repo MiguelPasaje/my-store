@@ -3,6 +3,16 @@
 <hr>
 <p>Total: {{total}}</p>
 <hr>
+<p>
+today: {{ today | date:'short'}}
+<br>
+today2: {{ date | date:'yyyy.dd...MM'}}
+<br>
+timeAgo: {{ date | timeAgo}}
+<br>
+today2: {{ date | date:'longTime'}}
+</p>
+<hr>
 <div class="product--grid">
   <app-product
    *ngFor="let product of products"

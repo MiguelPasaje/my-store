@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { Product} from '../../models/product.model'
+import { Product } from 'src/app/models/product.model';
+
+
 
 @Component({
   selector: 'app-product',
@@ -14,9 +16,11 @@ export class ProductComponent {
   //@Input('my-product') product: Product = {
     @Input() product: Product = {
       id : '',
-      name : '',
+      title : '',
       image : '',
-      price: 0
+      price: 0,
+      category:'',
+      description:''
     }
     @Output() addedProduct = new EventEmitter<Product>();
 
