@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 // import {Product} from './product.model'
 
-import { Product} from './models/product.model'
+
 
 
 
@@ -49,7 +49,7 @@ export class AppComponent {
     btnEstado : true,
   }
 
- 
+
   showImg = true;
 
   /* products: Product[]= [

@@ -28,9 +28,6 @@ export class ProductComponent {
 
   }
 
-  ngOnInit():void{
-  }
-
   onAddCart(){
     this.addedProduct.emit(this.product)
 

@@ -1,4 +1,4 @@
-const username:string = "miguel"
+//const username:string = "miguel"
 
 const sum = (a:number, b:number)=>{
   return a + b
