@@ -58,6 +58,8 @@ export class ProductsComponent {
   products: Product[] = []
   today = new Date()
   date = new Date(2021,1,21)
+  showProductDetail = false
+
 
   constructor(
     private storeService:StoreService,
@@ -84,4 +86,17 @@ export class ProductsComponent {
     this.storeService.addProduct(product);
     this.total = this.storeService.getTotal()
   }
+
+  onShowDetail(id:string){
+    console.log('id',id)
+    this.productsService.getProduct(id).subscribe(data=>{
+      console.log('product',data)
+    })
+  }
+
+  toggleProductDetail(){
+    this.showProductDetail = !this.showProductDetail;
+  }
+
+
 }

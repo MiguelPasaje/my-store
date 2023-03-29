@@ -17,12 +17,17 @@ export class ProductComponent {
     @Input() product: Product = {
       id : '',
       title : '',
-      image : '',
+      images : [],
       price: 0,
-      category:'',
+      category:{
+        id : 0,
+        name:''
+      },
       description:''
     }
     @Output() addedProduct = new EventEmitter<Product>();
+    @Output() showProduct = new EventEmitter<string>();//string para solo mandar el id y con él poder hacer un request
+
 
   constructor(){
 
@@ -30,6 +35,11 @@ export class ProductComponent {
 
   onAddCart(){
     this.addedProduct.emit(this.product)
+
+  }
+
+  onShowDetail(){
+    this.showProduct.emit(this.product.id)
 
   }
 
