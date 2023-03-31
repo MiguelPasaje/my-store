@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Product } from 'src/app/models/product.model';
+import { CreateProductDTO, Product, UpdateProductDTO } from 'src/app/models/product.model';
 
 import { StoreService } from 'src/app/services/store.service'
 import { ProductsService } from 'src/app/services/products.service'
@@ -14,6 +14,19 @@ export class ProductsComponent {
 
   myShoppingCart: Product[] = []
   total = 0
+
+  productChosen:Product = {
+    id : '',
+    title : '',
+    images : [],
+    price: 0,
+    category:{
+      id : 0,
+      name:''
+    },
+    description:''
+  } ;
+
   /* products: Product[] = [
     {
       id:'1',
@@ -55,6 +68,8 @@ export class ProductsComponent {
   ] */
 
 
+
+
   products: Product[] = []
   today = new Date()
   date = new Date(2021,1,21)
@@ -90,7 +105,9 @@ export class ProductsComponent {
   onShowDetail(id:string){
     console.log('id',id)
     this.productsService.getProduct(id).subscribe(data=>{
-      console.log('product',data)
+      //console.log('product',data)
+      this.showProductDetail = !this.showProductDetail;
+      this.productChosen = data;
     })
   }
 
@@ -98,5 +115,31 @@ export class ProductsComponent {
     this.showProductDetail = !this.showProductDetail;
   }
 
+  createNewProduct(){
+    const product:CreateProductDTO = {
+      title:'nuevo producto',
+      description: 'bla',
+      images:['https://placeimg.com/640/420/any'],
+      price:1000,
+      categoryId:3,
+    }
+    this.productsService.create(product).subscribe(data => {
+      console.log(data, 'created')
+      this.products.unshift(data)//inserta el producto creado en primera posicion
+    })
+  }
+
+  updateProduct(){
+    const changes: UpdateProductDTO = {
+      title: 'change title',
+    }
+    const id = this.productChosen.id;
+    this.productsService.update(id,changes)
+    .subscribe(data => {
+      console.log('update',data)
+      const productIndex = this.products.findIndex(item => item.id === this.productChosen.id)
+      this.products[productIndex] = data;
+    })
+  }
 
 }
