@@ -11,6 +11,7 @@ export interface Product{
   images: string[];
   description: string;
   category:Category;
+  taxes?:number;
 }
 
 export interface CreateProductDTO extends Omit<Product,'id'| 'category'> {//omitir  id y category ya que el id lo crea la bd y la category ya exite, solo se necesita el id de la category a la que existe el producto
