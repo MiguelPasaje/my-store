@@ -15,6 +15,7 @@ today2: {{ date | date:'longTime'}}
 <hr>
 <button (click)="toggleProductDetail()">click</button>
 <button (click)="createNewProduct()">create</button>
+<button (click)="onShowDetail('123456')">Deatalle not found</button>
 <hr>
 <div class="product--grid">
   <app-product
@@ -23,8 +24,10 @@ today2: {{ date | date:'longTime'}}
     (addedProduct)="onAddToShopingcart($event)"
     (showProduct)="onShowDetail($event)"
   ></app-product>
+  <button (click)="loadMore()" >load More</button>
 </div>
 <div class="product-detail" [class.active]="showProductDetail">
+  {{ statusDetail }}
   <div *ngIf="productChosen" class="">
     <button (click)="toggleProductDetail()">
       Close

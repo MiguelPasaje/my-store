@@ -3,6 +3,8 @@ import { CreateProductDTO, Product, UpdateProductDTO } from 'src/app/models/prod
 
 import { StoreService } from 'src/app/services/store.service'
 import { ProductsService } from 'src/app/services/products.service'
+import Swal from 'sweetalert2';
+
 
 
 @Component({
@@ -26,6 +28,11 @@ export class ProductsComponent {
     },
     description:''
   } ;
+
+  limit = 10 ;
+  offset = 0;
+
+  statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
 
   /* products: Product[] = [
     {
@@ -85,11 +92,16 @@ export class ProductsComponent {
   }
 
   ngOnInit() {
-    this.productsService.getAllProducts()
+    this.productsService.getProductsByPage(10,0)
     .subscribe(data => {
       console.log(data)
       this.products = data;
     })
+   /*  this.productsService.getAllProducts()
+    .subscribe(data => {
+      console.log(data)
+      this.products = data;
+    }) */
   }
 
   onAddToShopingcart(product:Product){
@@ -103,11 +115,26 @@ export class ProductsComponent {
   }
 
   onShowDetail(id:string){
+    this.statusDetail = 'loading'
     console.log('id',id)
+    this.toggleProductDetail()
     this.productsService.getProduct(id).subscribe(data=>{
       //console.log('product',data)
-      this.showProductDetail = !this.showProductDetail;
+     // this.showProductDetail = !this.showProductDetail;
       this.productChosen = data;
+      this.statusDetail = 'success';
+    },response => {
+      console.log(response)
+      //alert(response)
+      //window.alert(response)
+      Swal.fire({
+        title:'Error',
+        text:response,
+        icon:'error',
+        confirmButtonColor:'gray',
+        confirmButtonText:'ok'
+      })
+      this.statusDetail = 'error'
     })
   }
 
@@ -139,6 +166,7 @@ export class ProductsComponent {
       console.log('update',data)
       const productIndex = this.products.findIndex(item => item.id === this.productChosen.id)
       this.products[productIndex] = data;
+      this.productChosen = data
     })
   }
 
@@ -150,6 +178,16 @@ export class ProductsComponent {
       this.products.splice(productIndex,1)
       this.showProductDetail = false;
     })
+  }
+
+  loadMore(){
+    this.productsService.getProductsByPage(this.limit,  this.offset)
+    .subscribe(data => {
+      console.log(data)
+      this.products = this.products.concat(data);
+      this.offset += this.limit;
+    })
+
   }
 
 }
