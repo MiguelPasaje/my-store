@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 
 // import {Product} from './product.model'
 
+import { AuthService } from './services/auth.service'
+import { UsersService } from './services/users.service'
 
 
 
@@ -51,6 +53,7 @@ export class AppComponent {
 
 
   showImg = true;
+  token = '';
 
   /* products: Product[]= [
     {
@@ -86,6 +89,12 @@ export class AppComponent {
     }
   ] */
 
+  constructor(
+    private authService: AuthService,
+    private usersService: UsersService
+  ){
+
+  }
 
   toggleButton(){
     this.btnEstado = !this.btnEstado;
@@ -121,4 +130,33 @@ export class AppComponent {
     this.showImg = !this.showImg;
   }
 
+
+  /* auth */
+  createUser(){
+    this.usersService.create({
+      name:'miguel',
+      email:'miguel@gmail.com',
+      password:'12345'
+    })
+    .subscribe(rta => {
+      console.log(rta);
+
+    })
+  }
+
+  login(){
+    this.authService.login('miguel@gmail.com','12345')
+    .subscribe(rta => {
+      //console.log(rta.access_token);
+      this.token = rta.access_token;
+      console.log(this.token)
+    })
+  }
+  getProfile(){
+    this.authService.profile(this.token)
+    .subscribe(profile =>{
+      console.log(profile)
+    })
+
+  }
 }

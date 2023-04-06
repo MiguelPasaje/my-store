@@ -18,6 +18,7 @@ export interface CreateProductDTO extends Omit<Product,'id'| 'category'> {//omit
   categoryId:number;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface UpdateProductDTO extends Partial<CreateProductDTO>{ //lo que hace partial es poner un interrogante a cada item para que sean opcionales
 
 }
