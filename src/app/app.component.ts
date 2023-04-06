@@ -144,7 +144,7 @@ export class AppComponent {
     })
   }
 
-  login(){
+  /* login(){
     this.authService.login('miguel@gmail.com','12345')
     .subscribe(rta => {
       //console.log(rta.access_token);
@@ -158,5 +158,5 @@ export class AppComponent {
       console.log(profile)
     })
 
-  }
+  } */
 }
