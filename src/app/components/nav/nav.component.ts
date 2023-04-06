@@ -9,7 +9,7 @@ import { StoreService } from '../../services/store.service'
 })
 export class NavComponent implements OnInit {
 
-  activeMenu: boolean = false;
+  activeMenu = false;
   counter = 0;
 
   constructor(

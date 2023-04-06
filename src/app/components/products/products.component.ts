@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { switchMap } from 'rxjs/operators'
+import { zip } from 'rxjs'
+
 import { CreateProductDTO, Product, UpdateProductDTO } from 'src/app/models/product.model';
 
 import { StoreService } from 'src/app/services/store.service'
@@ -12,7 +15,7 @@ import Swal from 'sweetalert2';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent {
+export class ProductsComponent  implements OnInit {
 
   myShoppingCart: Product[] = []
   total = 0
@@ -136,6 +139,23 @@ export class ProductsComponent {
       })
       this.statusDetail = 'error'
     })
+  }
+
+  readAndUpdate(id:string){
+    this.productsService.getProduct(id)
+    .pipe(
+      switchMap((product)=> this.productsService.update(product.id, {title: 'changeReadAndupdate'})),
+      //switchMap((product)=> this.productsService.update(product.id, {title: 'changeReadAndupdate'})),
+    )
+    .subscribe(data => {
+      console.log(data)
+    });
+
+    this.productsService.fetchReadAndUpdate(id, {title: 'changeReadAndupdate'})
+    .subscribe(data => {
+      console.log(data); // recibo la data en forma de array ya que zip trae varias respuestas
+    })
+
   }
 
   toggleProductDetail(){
