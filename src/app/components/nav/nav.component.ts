@@ -14,7 +14,6 @@ export class NavComponent implements OnInit {
 
   activeMenu = false;
   counter = 0;
-  token = ''
   profile:User | null = null;
 
   constructor(
@@ -37,21 +36,18 @@ export class NavComponent implements OnInit {
 
   /* auth */
   login(){
-    this.authService.login('miguel@gmail.com','12345')
+    /* this.authService.login('miguel@gmail.com','12345')
     .subscribe(rta => {
       //console.log(rta.access_token);
       this.token = rta.access_token;
       console.log(this.token);
       this.getProfile()//aqui hay un callback hell
-    })
-  }
-  getProfile(){
-    this.authService.profile(this.token)
+    }) */
+    this.authService.loginAndGet('miguel@gmail.com','12345')
     .subscribe(user =>{
-      console.log(user)
       this.profile = user;
     })
-
   }
+  
 
 }
