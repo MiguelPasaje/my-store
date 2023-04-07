@@ -4,6 +4,7 @@ import { retry,catchError,map } from 'rxjs/operators'
 import {throwError, zip } from 'rxjs'
 
 import { CreateProductDTO, Product, UpdateProductDTO } from 'src/app/models/product.model';
+import { checkTime } from '../interceptors/time.interceptor';
 
 
 @Injectable({
@@ -23,7 +24,7 @@ export class ProductsService {
       params = params.set('limit',limit);
       params = params.set('offset',offset);
     }
-    return this.http.get<Product[]>(this.apiUrl, {params})
+    return this.http.get<Product[]>(this.apiUrl, {params,context:checkTime()})
     .pipe(
       retry(3),
       map(prducts => prducts.map(item => {
@@ -63,8 +64,9 @@ export class ProductsService {
 
   getProductsByPage(limit:number, offset:number){ //paginacion
     return this.http.get<Product[]>(`${this.apiUrl}`,{
-      params:{limit,offset}
-    } ).pipe(
+      params:{limit,offset},
+      context:checkTime()
+    }, ).pipe(
       retry(3),
       map(prducts => prducts.map(item => {
         return{
