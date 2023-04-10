@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
 
 import { AuthService } from './services/auth.service'
 import { UsersService } from './services/users.service'
+import { FilesService } from './services/files.service';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -15,6 +17,10 @@ import { UsersService } from './services/users.service'
 })
 export class AppComponent {
    imgParent = ''
+   imgRta = ''
+
+  private apiUrl = 'https://young-sands-07814.herokuapp.com/api/files'
+
 
    onloaded(img:string){
     console.log('log padre',img)
@@ -91,7 +97,9 @@ export class AppComponent {
 
   constructor(
     private authService: AuthService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private fileService: FilesService,
+    private http: HttpClient
   ){
 
   }
@@ -142,6 +150,32 @@ export class AppComponent {
       console.log(rta);
 
     })
+  }
+
+  downloadPdf(){
+    this.fileService.getFile('my.pdf','https://young-sands-07814.herokuapp.com/api/files/dummy.pdf', 'application/pdf')
+    .subscribe()
+  }
+
+  uploadFile(file:Blob){
+    const dto = new FormData();
+    dto.append('file',file);
+    return this.http.post(`${this.apiUrl}/upload`,dto,{
+     /*  headers:{
+        'Content-type': "multipart/form-data"
+      } */
+    })
+  }
+
+  onUpload(event:Event){
+    const element = event.target as HTMLInputElement;
+    const file = element.files?.item(0)
+    if (file) {
+      this.fileService.uploadFile(file)
+      .subscribe(rta => {
+        this,this.imgRta = rta.location
+      })
+    }
   }
 
   /* login(){
