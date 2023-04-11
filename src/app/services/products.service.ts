@@ -5,6 +5,7 @@ import {throwError, zip } from 'rxjs'
 
 import { CreateProductDTO, Product, UpdateProductDTO } from 'src/app/models/product.model';
 import { checkTime } from '../interceptors/time.interceptor';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ import { checkTime } from '../interceptors/time.interceptor';
 })
 export class ProductsService {
 
-  private apiUrl = 'https://young-sands-07814.herokuapp.com/api/products'
+  private apiUrl = `${environment.API_URL}/api/products`;
 
   constructor(
     private http:HttpClient
