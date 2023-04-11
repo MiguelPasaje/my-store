@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { switchMap } from 'rxjs/operators'
-import { zip } from 'rxjs'
+/* import { zip } from 'rxjs' */
 
 import { CreateProductDTO, Product, UpdateProductDTO } from 'src/app/models/product.model';
 
