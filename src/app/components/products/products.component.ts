@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { switchMap } from 'rxjs/operators'
 /* import { zip } from 'rxjs' */
 
@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent  implements OnInit {
+export class ProductsComponent {
 
   myShoppingCart: Product[] = []
   total = 0
@@ -32,8 +32,8 @@ export class ProductsComponent  implements OnInit {
     description:''
   } ;
 
-  limit = 10 ;
-  offset = 0;
+ /*  limit = 10 ;
+  offset = 0; */
 
   statusDetail: 'loading' | 'success' | 'error' | 'init' = 'init';
 
@@ -80,7 +80,7 @@ export class ProductsComponent  implements OnInit {
 
 
 
-  products: Product[] = []
+  @Input() products: Product[] = []
   today = new Date()
   date = new Date(2021,1,21)
   showProductDetail = false
@@ -94,18 +94,18 @@ export class ProductsComponent  implements OnInit {
 
   }
 
-  ngOnInit() {
-    this.productsService.getProductsByPage(10,0)
+  //ngOnInit() {
+   /*  this.productsService.getProductsByPage(10,0)
     .subscribe(data => {
       console.log(data)
       this.products = data;
-    })
+    }) */
    /*  this.productsService.getAllProducts()
     .subscribe(data => {
       console.log(data)
       this.products = data;
     }) */
-  }
+  //}
 
   onAddToShopingcart(product:Product){
     //console.log(product)
@@ -200,7 +200,7 @@ export class ProductsComponent  implements OnInit {
     })
   }
 
-  loadMore(){
+ /*  loadMore(){
     this.productsService.getProductsByPage(this.limit,  this.offset)
     .subscribe(data => {
       console.log(data)
@@ -208,6 +208,6 @@ export class ProductsComponent  implements OnInit {
       this.offset += this.limit;
     })
 
-  }
+  } */
 
 }

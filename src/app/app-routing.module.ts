@@ -14,6 +14,11 @@ import { ProfileComponent } from './pages/profile/profile.component';
 const routes: Routes = [
   //crear reglas
   {
+    path: '',
+    redirectTo: 'home',
+    pathMatch:'full'
+  },
+  {
     path: 'home',
     component: HomeComponent
   },
