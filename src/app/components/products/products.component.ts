@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { switchMap } from 'rxjs/operators'
 /* import { zip } from 'rxjs' */
 
@@ -84,6 +84,7 @@ export class ProductsComponent {
   today = new Date()
   date = new Date(2021,1,21)
   showProductDetail = false
+  @Output() loadMore = new EventEmitter();
 
 
   constructor(
@@ -209,5 +210,9 @@ export class ProductsComponent {
     })
 
   } */
+
+  onloadMore(){
+    this.loadMore.emit()
+  }
 
 }

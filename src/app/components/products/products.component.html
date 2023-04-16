@@ -25,6 +25,7 @@ today2: {{ date | date:'longTime'}}
     (showProduct)="onShowDetail($event)"
   ></app-product>
   <!-- <button (click)="loadMore()" >load More</button> -->
+  <button (click)="onloadMore()" >load More</button>
 </div>
 <div class="product-detail" [class.active]="showProductDetail">
   {{ statusDetail }}

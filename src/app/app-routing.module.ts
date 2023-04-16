@@ -23,7 +23,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'category',
+    path: 'category/:id', // id debe llamrse igual en donde se vaya a utilizar **1
     component: CategoryComponent
   },
   {
