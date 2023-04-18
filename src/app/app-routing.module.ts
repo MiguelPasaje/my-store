@@ -49,6 +49,10 @@ const routes: Routes = [
   {
     path: 'profileComponent',
     component: ProfileComponent
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 
