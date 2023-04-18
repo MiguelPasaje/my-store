@@ -85,6 +85,13 @@ export class ProductsComponent {
   date = new Date(2021,1,21)
   showProductDetail = false
   @Output() loadMore = new EventEmitter();
+  //@Input() productId : string | null = null;
+  @Input()
+  set productId(id: string | null){
+    if (id) {
+      this.onShowDetail(id)
+    }
+  }
 
 
   constructor(
@@ -120,8 +127,11 @@ export class ProductsComponent {
 
   onShowDetail(id:string){
     this.statusDetail = 'loading'
-    console.log('id',id)
-    this.toggleProductDetail()
+    // console.log('id',id)
+    //this.toggleProductDetail()
+    if (!this.showProductDetail) {
+      this.showProductDetail = true
+    }
     this.productsService.getProduct(id).subscribe(data=>{
       //console.log('product',data)
      // this.showProductDetail = !this.showProductDetail;

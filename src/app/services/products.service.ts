@@ -101,4 +101,23 @@ export class ProductsService {
     return this.http.delete<boolean>(`${this.apiUrl}/products/${id}`)
   }
 
+  getOne(id:string){
+    return this.http.get<Product>(`${this.apiUrl}/products/${id}`)
+    .pipe(
+      catchError((error:HttpErrorResponse)=>{
+        if (error.status === HttpStatusCode.Conflict) {
+          return throwError('Algo esta fallando en el server')
+        }
+        if (error.status === HttpStatusCode.NotFound) {
+          return throwError('el producto no existe')
+        }
+        if (error.status === HttpStatusCode.Unauthorized) {
+          return throwError('no estas permitido')
+        }
+        return throwError('ups... algo salio mal')
+
+      })
+    )
+  }
+
 }
