@@ -10,50 +10,57 @@ import { RegisterComponent } from './website/pages/register/register.component';
 import { RecoveryComponent } from './website/pages/recovery/recovery.component';
 import { ProfileComponent } from './website/pages/profile/profile.component';
 import { ProductDetailComponent } from './website/pages/product-detail/product-detail.component';
+import { LayoutComponent } from './website/components/layout/layout.component';
 
 
 const routes: Routes = [
   //crear reglas
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch:'full'
-  },
-  {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: 'category/:id', // id debe llamrse igual en donde se vaya a utilizar **1
-    component: CategoryComponent
-  },
-  {
-    path: 'product/:id', // id debe llamrse igual en donde se vaya a utilizar **1
-    component: ProductDetailComponent
-  },
-  {
-    path: 'notFoundComponent',
-    component: NotFoundComponent
-  },
-  {
-    path: 'mycartComponent',
-    component: MycartComponent
-  },
-  {
-    path: 'loginComponent',
-    component: LoginComponent
-  },
-  {
-    path: 'registerComponent',
-    component: RegisterComponent
-  },
-  {
-    path: 'recoveryComponent',
-    component: RecoveryComponent
-  },
-  {
-    path: 'profileComponent',
-    component: ProfileComponent
+    component: LayoutComponent,
+    children:[
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch:'full'
+      },
+      {
+        path: 'home',
+        component: HomeComponent
+      },
+      {
+        path: 'category/:id', // id debe llamrse igual en donde se vaya a utilizar **1
+        component: CategoryComponent
+      },
+      {
+        path: 'product/:id', // id debe llamrse igual en donde se vaya a utilizar **1
+        component: ProductDetailComponent
+      },
+      {
+        path: 'notFoundComponent',
+        component: NotFoundComponent
+      },
+      {
+        path: 'mycartComponent',
+        component: MycartComponent
+      },
+      {
+        path: 'loginComponent',
+        component: LoginComponent
+      },
+      {
+        path: 'registerComponent',
+        component: RegisterComponent
+      },
+      {
+        path: 'recoveryComponent',
+        component: RecoveryComponent
+      },
+      {
+        path: 'profileComponent',
+        component: ProfileComponent
+      },
+    ]
   },
   {
     path: '**',
