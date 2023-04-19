@@ -15,6 +15,7 @@ export class StoreService {
   myCart$ = this.myCart.asObservable();
 
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() { }
 
   addProduct(product: Product){
