@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './pages/home/home.component';
 
-import { CategoryComponent } from './pages/category/category.component';
+
 import { MycartComponent } from './pages/mycart/mycart.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -27,8 +27,9 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: 'category/:id', // id debe llamrse igual en donde se vaya a utilizar **1
-        component: CategoryComponent,
+        path: 'category', 
+        loadChildren:()=> import('./pages/category/category.module').then(m => m.CategoryModule)
+
       },
       {
         path: 'product/:id', // id debe llamrse igual en donde se vaya a utilizar **1
