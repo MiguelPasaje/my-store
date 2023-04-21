@@ -4,13 +4,17 @@ import { RouterModule, Routes ,PreloadAllModules } from '@angular/router';
 //PreloadAllModules-> para que carguen los modulos en background
 
 import { NotFoundComponent } from './not-found/not-found.component';
+import { CustomPreloadService } from './services/custom-preload.service';
 
 
 const routes: Routes = [
   //crear reglas
   {
     path: '',
-    loadChildren:()=> import('./website/website.module').then(m => m.WebsiteModule)
+    loadChildren:()=> import('./website/website.module').then(m => m.WebsiteModule),
+    data:{
+      preload:true,
+    }
   },
   {
     path: 'cms',
@@ -24,7 +28,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    preloadingStrategy:PreloadAllModules
+    preloadingStrategy:CustomPreloadService
   })],
   exports: [RouterModule]
 })
