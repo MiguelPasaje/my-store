@@ -29,6 +29,7 @@ export class ProductComponent {
     @Output() showProduct = new EventEmitter<string>();//string para solo mandar el id y con él poder hacer un request
 
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(){
 
   }
