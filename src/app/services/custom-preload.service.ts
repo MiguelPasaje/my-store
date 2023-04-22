@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 })
 export class CustomPreloadService implements PreloadingStrategy {
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() { }
 
   preload(route: Route, laod: () => Observable<any>): Observable<any> {
