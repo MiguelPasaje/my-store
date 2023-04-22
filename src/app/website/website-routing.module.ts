@@ -11,6 +11,7 @@ import { RecoveryComponent } from './pages/recovery/recovery.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -43,23 +44,24 @@ const routes: Routes = [
         component: NotFoundComponent
       }, */
       {
-        path: 'mycartComponent',
+        path: 'mycart',
         component: MycartComponent,
       },
       {
-        path: 'loginComponent',
+        path: 'login',
         component: LoginComponent,
       },
       {
-        path: 'registerComponent',
+        path: 'register',
         component: RegisterComponent,
       },
       {
-        path: 'recoveryComponent',
+        path: 'recovery',
         component: RecoveryComponent,
       },
       {
-        path: 'profileComponent',
+        path: 'profile',
+        canActivate: [AuthGuard], // para proteger la vista
         component: ProfileComponent,
       },
     ],

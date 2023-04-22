@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
-  /* templateUrl: './app.component.html', */
+  /* templateUrl: './app.component.html', */ //descomentar esta linea y comentar la otra para poder crear el user y poder loguearse 
   template: `<router-outlet></router-outlet>`,
   styleUrls: ['./app.component.scss']
 })
@@ -145,7 +145,8 @@ export class AppComponent {
     this.usersService.create({
       name:'miguel',
       email:'miguel@gmail.com',
-      password:'12345'
+      password:'12345',
+     /*  role:'admin' */
     })
     .subscribe(rta => {
       console.log(rta);

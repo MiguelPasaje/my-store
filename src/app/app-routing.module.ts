@@ -6,6 +6,7 @@ import { RouterModule, Routes /* ,PreloadAllModules  */} from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
 /* import { CustomPreloadService } from './services/custom-preload.service'; */
 import { QuicklinkStrategy } from 'ngx-quicklink';
+import { AppComponent } from './app.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: '**',
     component: NotFoundComponent
+  },
+  {
+    path: 'appComponent',
+    component: AppComponent
   }
 ];
 
