@@ -8,6 +8,7 @@ import { Category } from 'src/app/models/product.model';
 import { User } from 'src/app/models/user.model';
 import { StoreService } from 'src/app/services/store.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class NavComponent implements OnInit {
   constructor(
     private storeService: StoreService,
     private authService:AuthService,
-    private categoriesService:CategoriesService
+    private categoriesService:CategoriesService,
+    private router: Router
   ){
 
   }
@@ -61,6 +63,12 @@ export class NavComponent implements OnInit {
     this.categoriesService.getAll().subscribe(data =>{
       this.categories = data
     })
+  }
+
+  logOut(){
+    this.authService.logAuth()
+    this.profile = null
+    this.router.navigate(['/home'])
   }
 
 

@@ -12,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
-  /* templateUrl: './app.component.html', */ //descomentar esta linea y comentar la otra para poder crear el user y poder loguearse 
+  /* templateUrl: './app.component.html', */ //descomentar esta linea y comentar la otra para poder crear el user y poder loguearse
   template: `<router-outlet></router-outlet>`,
   styleUrls: ['./app.component.scss']
 })

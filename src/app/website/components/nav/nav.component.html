@@ -40,6 +40,7 @@
         <ng-template #elseBlock>
           <a routerLink="/profile">Perfil -</a>
           <label for="">{{ profile?.email }}</label>
+          <button (click)="logOut()">LogOut</button>
         </ng-template>
       </div>
       <div class="">
