@@ -13,7 +13,9 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductsService {
 
-  private apiUrl = `${environment.API_URL}/api`;
+  //private apiUrl = `${environment.API_URL}/api`;
+  private apiUrl = 'https://damp-spire-59848.herokuapp.com/api';
+
 
   constructor(
     private http:HttpClient

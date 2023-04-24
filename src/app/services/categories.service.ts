@@ -10,7 +10,9 @@ import { Category } from '../models/product.model';
 })
 export class CategoriesService {
 
-  private apiUrl = `${environment.API_URL}/api/categories`;
+  //private apiUrl = `${environment.API_URL}/api/categories`;
+  private apiUrl = 'https://damp-spire-59848.herokuapp.com/api/categories';
+
 
 
   constructor(
