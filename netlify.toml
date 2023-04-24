@@ -1,5 +1,5 @@
 [build]
-  publish = "distmy-store"
+  publish = "dist/my-store"
   command = "npm run build"
 [[redirects]]
   from = "/*"
