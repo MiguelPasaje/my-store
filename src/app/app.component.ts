@@ -1,63 +1,59 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 // import {Product} from './product.model'
 
-import { AuthService } from './services/auth.service'
-import { UsersService } from './services/users.service'
+import { AuthService } from './services/auth.service';
+import { UsersService } from './services/users.service';
 import { FilesService } from './services/files.service';
 import { HttpClient } from '@angular/common/http';
-
-
-
+import { TokenService } from './services/token.service';
 
 @Component({
   selector: 'app-root',
   /* templateUrl: './app.component.html', */ //descomentar esta linea y comentar la otra para poder crear el user y poder loguearse
   template: `<router-outlet></router-outlet>`,
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-   imgParent = ''
-   imgRta = ''
+export class AppComponent implements OnInit {
+  imgParent = '';
+  imgRta = '';
 
-  private apiUrl = 'https://young-sands-07814.herokuapp.com/api/files'
+  private apiUrl = 'https://damp-spire-59848.herokuapp.com/api/files';
 
-
-   onloaded(img:string){
-    console.log('log padre',img)
-   }
-
+  onloaded(img: string) {
+    console.log('log padre', img);
+  }
 
   /* curso 1 */
   name = 'Miguel';
   age = 28;
-  img = 'https://catalyst-au.net/wp-content/uploads/2021/12/top-programing-languages.jpeg';
+  img =
+    'https://catalyst-au.net/wp-content/uploads/2021/12/top-programing-languages.jpeg';
   btnEstado = true;
 
   register = {
     name: '',
-    email:'',
-    password:''
-  }
+    email: '',
+    password: '',
+  };
 
   widthImg = 10;
 
-  names:string[] = ['Nico','Miguel','Andres']
+  names: string[] = ['Nico', 'Miguel', 'Andres'];
   newName = '';
 
-  box= {
-    width:100,
-    height:100,
-    background:'red'
-  }
+  box = {
+    width: 100,
+    height: 100,
+    background: 'red',
+  };
 
   person = {
-    name : 'Miguel',
-    age : 58,
-    img : 'https://catalyst-au.net/wp-content/uploads/2021/12/top-programing-languages.jpeg',
-    btnEstado : true,
-  }
-
+    name: 'Miguel',
+    age: 58,
+    img: 'https://catalyst-au.net/wp-content/uploads/2021/12/top-programing-languages.jpeg',
+    btnEstado: true,
+  };
 
   showImg = true;
   token = '';
@@ -100,83 +96,90 @@ export class AppComponent {
     private authService: AuthService,
     private usersService: UsersService,
     private fileService: FilesService,
-    private http: HttpClient
-  ){
-
+    private http: HttpClient,
+    private tokenService: TokenService
+  ) {}
+  ngOnInit() {
+    const token = this.tokenService.getToken();
+    if (token) {
+      this.authService.getProfile().subscribe();
+    }
   }
 
-  toggleButton(){
+  toggleButton() {
     this.btnEstado = !this.btnEstado;
   }
 
-  increaseAge(){
+  increaseAge() {
     this.age += 1;
   }
-  onScroll(event:Event){
+  onScroll(event: Event) {
     const element = event.target as HTMLElement;
-    console.log(element.scrollTop)
+    console.log(element.scrollTop);
   }
 
-  changeName(event:Event){
+  changeName(event: Event) {
     const element = event.target as HTMLInputElement;
-    this.name = element.value
+    this.name = element.value;
   }
 
-  addName(){
-    this.names.push(this.newName)
-    this.newName = ''
+  addName() {
+    this.names.push(this.newName);
+    this.newName = '';
   }
-  deleteName(index:number){
-    this.names.splice(index,1)
-
-  }
-
-  onRegister(){
-    console.log(this.register)
+  deleteName(index: number) {
+    this.names.splice(index, 1);
   }
 
-  toggleImg(){
+  onRegister() {
+    console.log(this.register);
+  }
+
+  toggleImg() {
     this.showImg = !this.showImg;
   }
 
-
   /* auth */
-  createUser(){
-    this.usersService.create({
-      name:'miguel',
-      email:'miguel@gmail.com',
-      password:'12345',
-     /*  role:'admin' */
-    })
-    .subscribe(rta => {
-      console.log(rta);
-
-    })
+  createUser() {
+    this.usersService
+      .create({
+        name: 'miguel',
+        email: 'miguel@gmail2.com',
+        password: '12345',
+        role:'admin'
+      })
+      .subscribe((rta) => {
+        console.log(rta);
+      });
   }
 
-  downloadPdf(){
-    this.fileService.getFile('my.pdf','https://young-sands-07814.herokuapp.com/api/files/dummy.pdf', 'application/pdf')
-    .subscribe()
+  downloadPdf() {
+    this.fileService
+      .getFile(
+        'my.pdf',
+        'https://damp-spire-59848.herokuapp.com/api/files/dummy.pdf',
+        'application/pdf'
+      )
+      .subscribe();
   }
 
-  uploadFile(file:Blob){
+  uploadFile(file: Blob) {
     const dto = new FormData();
-    dto.append('file',file);
-    return this.http.post(`${this.apiUrl}/upload`,dto,{
-     /*  headers:{
+    dto.append('file', file);
+    return this.http.post(`${this.apiUrl}/upload`, dto, {
+      /*  headers:{
         'Content-type': "multipart/form-data"
       } */
-    })
+    });
   }
 
-  onUpload(event:Event){
+  onUpload(event: Event) {
     const element = event.target as HTMLInputElement;
-    const file = element.files?.item(0)
+    const file = element.files?.item(0);
     if (file) {
-      this.fileService.uploadFile(file)
-      .subscribe(rta => {
-        this,this.imgRta = rta.location
-      })
+      this.fileService.uploadFile(file).subscribe((rta) => {
+        this, (this.imgRta = rta.location);
+      });
     }
   }
 

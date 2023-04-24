@@ -36,7 +36,11 @@ export class NavComponent implements OnInit {
     this.storeService.myCart$.subscribe(products => {
       this.counter = products.length;
     })
-    this.getAllCategories()
+    this.getAllCategories() ;
+    this.authService.user$
+    .subscribe(data => {
+      this.profile = data;
+    })
   }
 
   toggleMenu(){
@@ -53,9 +57,10 @@ export class NavComponent implements OnInit {
       console.log(this.token);
       this.getProfile()//aqui hay un callback hell
     }) */
-    this.authService.loginAndGet('miguel@gmail.com','12345')
+    this.authService.loginAndGet('miguel@gmail2.com','12345')
     .subscribe(user =>{
-      this.profile = user;
+      /* this.profile = user; */
+      this.router.navigate(['/profile'])
     })
   }
 

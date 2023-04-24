@@ -1,50 +1,48 @@
 import { Injectable } from '@angular/core';
-import { HttpClient/* , HttpHeaders */ } from '@angular/common/http'
+import { HttpClient /* , HttpHeaders */ } from '@angular/common/http';
 
-import { Auth } from '../models/auth.model'
+import { Auth } from '../models/auth.model';
 import { User } from '../models/user.model';
-import { switchMap, tap } from 'rxjs';
+import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { TokenService } from './token.service';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  private apiUrl = 'https://damp-spire-59848.herokuapp.com/api/auth';
+  private user = new BehaviorSubject<User | null>(null);
 
-  private apiUrl = 'https://young-sands-07814.herokuapp.com/api/auth'
+  user$ = this.user.asObservable();
 
-  constructor(
-    private http: HttpClient,
-    private tokenService:TokenService
-  ) { }
+  constructor(private http: HttpClient, private tokenService: TokenService) {}
 
-  login(email:string, password:string){
-    return this.http.post<Auth>(`${this.apiUrl}/login`,{email,password})
-    .pipe(
-      tap(response => this.tokenService.savenToken(response.access_token))
-    )
+  login(email: string, password: string) {
+    return this.http
+      .post<Auth>(`${this.apiUrl}/login`, { email, password })
+      .pipe(
+        tap((response) => this.tokenService.savenToken(response.access_token))
+      );
   }
 
-  getProfile(){
+  getProfile() {
     //const headers = new HttpHeaders();
     //headers.set('Authorization',`Bearer ${token}`)
-    return this.http.get<User>(`${this.apiUrl}/profile`, {
-     /*  headers:{
+    return this.http
+      .get<User>(`${this.apiUrl}/profile`, {
+        /*  headers:{
         Authorization: `Bearer ${token}`,
         //'content-type': 'aplication/json'
       } */
-    })
+      })
+      .pipe(tap((user) => this.user.next(user)));
   }
 
-  loginAndGet(email:string,password:string){
-    return this.login(email,password)
-    .pipe(
-      switchMap(()=> this.getProfile())
-    )
+  loginAndGet(email: string, password: string) {
+    return this.login(email, password).pipe(switchMap(() => this.getProfile()));
   }
 
-  logAuth(){
-    this.tokenService.removeToken()
+  logAuth() {
+    this.tokenService.removeToken();
   }
 }
